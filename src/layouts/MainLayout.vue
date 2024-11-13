@@ -11,8 +11,8 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="text-h4">
+          Knjižnica
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -25,17 +25,19 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <q-item-label header>Izbornik</q-item-label>
+        <q-separator spaced />
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+        <!-- Generiranje izbornika na temelju linkedList -->
+        <q-item v-for="item in linkedList" :key="item.title" clickable @click="navigate(item.link)">
+          <q-item-section avatar>
+            <q-icon :name="item.icon" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ item.title }}</q-item-label>
+            <q-item-label caption>{{ item.caption }}</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -47,60 +49,33 @@
 
 <script setup>
 import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from 'vue-router' // Importiranje useRouter
 
 defineOptions({
   name: 'MainLayout'
 })
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
+// Definiranje stavki izbornika za projekt Knjižnica
+const linkedList = [
+  { title: 'Naslovnica', caption: 'Početna stranica', icon: 'home', link: '/' },
+  { title: 'Popis Knjiga', caption: 'Sve knjige', icon: 'book', link: '/popis_knjiga' },
+  { title: 'Pretraživanje', caption: 'Traži knjigu', icon: 'search', link: '/pretrazivanje' },
+  { title: 'O nama', caption: 'Informacije o knjižnici', icon: 'info', link: '/o_nama' },
+  { title: 'Lokacija', caption: 'Lokacija knjižnice', icon: 'location_on', link: '/lokacija' },
+  { title: 'Login', caption: 'Prijava korisnika', icon: 'login', link: '/login' },
+  { title: 'Registracija', caption: 'Registracija korisnika', icon: 'person_add', link: '/registracija' }
 ]
 
 const leftDrawerOpen = ref(false)
 
+const router = useRouter() // Inicijalizacija routera
+
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+// Funkcija za navigaciju
+function navigate(link) {
+  router.push(link)
 }
 </script>
