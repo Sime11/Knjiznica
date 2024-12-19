@@ -1,0 +1,38 @@
+{
+  "name": "knjiznica",
+  "version": "1.0.0",
+  "description": "Projekt za knjižnicu",
+  "main": "index.js",
+  "scripts": {
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.15",
+    "axios": "^1.7.9",
+    "leaflet": "^1.9.4",
+    "mysql": "^2.18.1",
+    "quasar": "^2.0.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "^2.0.2",
+    "@quasar/cli": "^2.4.1",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.45.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sime11/Knjiznica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sime11/Knjiznica/issues"
+  },
+  "homepage": "https://github.com/Sime11/Knjiznica#readme",
+  "author": "jures",
+  "license": "ISC"
+}
